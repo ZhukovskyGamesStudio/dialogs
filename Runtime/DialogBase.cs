@@ -7,19 +7,23 @@ namespace Dialogs {
         private DialogAnimationController _animationController;
         private DialogAnimationController AnimationController => _animationController ??= GetComponent<DialogAnimationController>();
         protected event Action OnClose;
+        protected event Action<bool> OnHideUI;
 
+        public bool IsHidingUIOnOpen => IsHideProfile;
         protected virtual bool IsHideProfile => false;
 
-        public virtual async UniTask Show(Action onClose) {
+        public virtual async UniTask Show(Action onClose, Action<bool> onHideUI) {
             gameObject.SetActive(true);
             OnClose = onClose;
+            OnHideUI = onHideUI;
             if (AnimationController) {
                 await AnimationController.Show();
             }
 
-            //if (IsHideProfile) {
-            //    UIHud.Instance.ProfileView.Hide();
-            //}
+            if (IsHidingUIOnOpen) {
+                OnHideUI?.Invoke(true);
+                //UIHud.Instance.ProfileView.Hide();
+            }
         }
 
         public void CloseByButton() {
@@ -27,9 +31,10 @@ namespace Dialogs {
         }
 
         protected virtual async UniTask Close() {
-            // if (IsHideProfile) {
-            //     UIHud.Instance.ProfileView.Show();
-            // }
+            if (IsHidingUIOnOpen) {
+                OnHideUI?.Invoke(false);
+                // UIHud.Instance.ProfileView.Show();
+            }
 
             if (AnimationController) {
                 await AnimationController.Hide();

@@ -13,11 +13,12 @@ namespace Dialogs {
         private DialogBase _shownDialog;
         public bool IsDialogShown => _shownDialog != null;
 
+        public Action<bool> OnHideUI;
+
         private void Awake() {
             Instance = this;
             LoadDialogs();
         }
-
 
         private void LoadDialogs() {
 #if UNITY_EDITOR
@@ -27,7 +28,6 @@ namespace Dialogs {
             }
 #endif
 
-
             var loadedDialogs = Resources.LoadAll<DialogBase>("Dialogs");
             foreach (var dialog in loadedDialogs) {
                 if (!_dialogs.Contains(dialog)) {
@@ -35,7 +35,6 @@ namespace Dialogs {
                 }
             }
         }
-
 
         public void ShowDialog(Type dialogType) {
             if (_shownDialog != null && _shownDialog.GetComponent(dialogType) != null) {
@@ -86,7 +85,7 @@ namespace Dialogs {
             }
 
             _shownDialog = _dialogQueue.Dequeue();
-            _shownDialog.Show(OnClosedDialog);
+            _shownDialog.Show(OnClosedDialog, OnHideUI);
         }
 
         private void OnClosedDialog() {
