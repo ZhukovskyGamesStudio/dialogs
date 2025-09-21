@@ -2,7 +2,7 @@
   "name": "com.zhukovskygames.dialogs",
   "version": "1.0.0",
   "displayName": "Dialogs",
-  "description": "Позволяет показывать очередь из диалогов ожин за другим или \"матрёшкой\".\nПоддерживает затемнения, анимации, передачу данных и подгрузку из ресурсов/addressables. ",
+  "description": "Позволяет показывать очередь из диалогов один за другим или \"матрёшкой\".\nПоддерживает затемнения, анимации, передачу данных и подгрузку из ресурсов/addressables. ",
   "unity": "2021.3",
   "dependencies": {
     "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask"
