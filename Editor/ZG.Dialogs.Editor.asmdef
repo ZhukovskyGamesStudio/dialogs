@@ -1,0 +1,13 @@
+{
+	"name": "ZG.Dialogs.Editor",
+	"references": [
+		"Unity.TextMeshPro"
+	],
+	"includePlatforms": [],
+	"excludePlatforms": [],
+	"allowUnsafeCode": false,
+	"overrideReferences": false,
+	"autoReferenced": true,
+	"defineConstraints": [],
+	"noEngineReferences": false
+}
