@@ -22,7 +22,6 @@ namespace Dialogs {
 
             if (IsHidingUIOnOpen) {
                 OnHideUI?.Invoke(true);
-                //UIHud.Instance.ProfileView.Hide();
             }
         }
 
@@ -33,7 +32,6 @@ namespace Dialogs {
         protected virtual async UniTask Close() {
             if (IsHidingUIOnOpen) {
                 OnHideUI?.Invoke(false);
-                // UIHud.Instance.ProfileView.Show();
             }
 
             if (AnimationController) {
