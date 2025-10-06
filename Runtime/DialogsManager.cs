@@ -14,6 +14,7 @@ namespace Dialogs {
         public bool IsDialogShown => _shownDialog != null;
 
         public Action<bool> OnHideUI;
+        public Action OnQueueEmptied;
 
         private void Awake() {
             Instance = this;
@@ -91,6 +92,9 @@ namespace Dialogs {
         private void OnClosedDialog() {
             _shownDialog = null;
             TryShowFromQueue();
+            if (_shownDialog == null && _dialogQueue.Count == 0) {
+                OnQueueEmptied?.Invoke();
+            }
         }
     }
 }
